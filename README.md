@@ -41,7 +41,7 @@ Raw and cleaned datasets are stored separately to preserve data lineage, reprodu
 5. Built an interactive Tableau dashboard to visualize lead flow and drop-offs
 
 ---
-
+```text
 ## Project Structure
 sales_lead_funnel_analysis/
 │
@@ -67,7 +67,7 @@ sales_lead_funnel_analysis/
 │ └── funnel_dashboard.png
 │
 └── README.md
-
+```
 
 ---
 
