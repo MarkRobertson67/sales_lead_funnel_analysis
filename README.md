@@ -8,11 +8,11 @@ The project demonstrates an end-to-end analytics workflow, including data cleani
 ---
 
 ## Business Question
-How effectively are sales leads progressing through each stage of the funnel, and where are the largest drop-offs occurring?
+How are sales leads distributed across funnel stages, and what overall outcomes (Won, Lost, Open) are observed?
 
 Key questions addressed:
-- What percentage of leads convert at each funnel stage?
-- Which stages experience the highest loss of potential customers?
+- What percentage of total leads fall into each funnel stage and final outcome?
+- Which funnel stages contain the highest concentration of lost or stalled leads?
 - Where should sales teams focus to improve funnel efficiency?
 - How can funnel performance be clearly communicated to stakeholders?
 
@@ -38,7 +38,7 @@ Raw and cleaned datasets are stored separately to preserve data lineage, reprodu
 2. Performed initial data quality checks and validation in **Excel**
 3. Saved a cleaned, verified CSV for analysis
 4. Applied funnel logic and created analytical fields in **SQL**
-5. Calculated funnel counts and conversion metrics in SQL
+5. Calculated funnel stage distributions and overall outcome metrics in SQL
 6. Built an interactive **Tableau dashboard** to visualize lead flow and drop-offs
 
 ---
@@ -108,18 +108,32 @@ This separation ensures that Excel handles data quality, while SQL encodes busin
 ## Funnel Metrics (SQL)
 Using SQL, leads were aggregated by funnel stage to calculate:
 - Total leads per stage
-- Stage-to-stage conversion rates
-- Overall lead-to-conversion rate
+- Percentage of total leads by stage
+- Overall funnel outcomes (Won / Lost / Open)
 
 These KPIs make it easy to identify bottlenecks and prioritize improvements in the sales process.
+
+---
+
+## Assumptions & Limitations
+
+This analysis is based on a snapshot dataset where each lead appears once with a single current Deal Stage.  
+Because the data does not include time-ordered stage transitions or historical progression, true stage-to-stage conversion rates cannot be calculated.
+
+As a result:
+- Funnel analysis focuses on lead distribution by stage
+- Conversion analysis is limited to overall outcomes (Won / Lost / Open)
+- Stage-to-stage conversion rates are intentionally not reported to avoid misleading conclusions
+
+These assumptions ensure that reported metrics accurately reflect the structure and limitations of the underlying data.
 
 ---
 
 ## Tableau Dashboard
 The Tableau dashboard visualizes:
 - Lead counts by funnel stage
-- Conversion rates between stages
-- Funnel drop-off points at a glance
+- Overall funnel outcome rates (Won / Lost / Open)
+- Funnel concentration points at a glance
 
 The dashboard is designed for non-technical stakeholders and supports fast, data-driven decision making.
 
@@ -129,9 +143,9 @@ See `/screenshots/funnel_dashboard.png`
 ---
 
 ## Key Insights
-- The largest drop-off occurs between early qualification and active engagement.
-- Once leads pass initial screening, later-stage conversion rates improve significantly.
-- Improved funnel visibility enables targeted improvements in lead qualification and follow-up strategy.
+- The majority of leads are concentrated mid-funnel, particularly in the Active Deal stage.
+- Overall conversion remains low (~10%), with most leads still open, highlighting an opportunity to improve deal progression rather than lead acquisition.
+- Funnel visibility enables data-driven prioritization of sales process improvements.
 
 ---
 
