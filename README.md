@@ -21,13 +21,13 @@ Key questions addressed:
 ## Dataset
 - **Source:** Synthetic CSV dataset from Datablist
 - **Format:** CSV
-- **Records:** Sales leads with defined lifecycle stages
+- **Records:** 10,000 sales leads with defined lifecycle stages
 - **Example Fields:**
   - Lead ID
-  - Lead Created Date
-  - Funnel Stage
-  - Conversion Status
+  - Deal Stage
   - Lead Source / Channel
+  - Contact Information
+  - Notes
 
 Raw and cleaned datasets are stored separately to preserve data lineage, reproducibility, and auditability.
 
@@ -35,10 +35,11 @@ Raw and cleaned datasets are stored separately to preserve data lineage, reprodu
 
 ## Project Workflow
 1. Ingested raw sales lead data (CSV)
-2. Cleaned and standardized data using SQL
-3. Validated key fields and record counts in Excel
-4. Calculated funnel and conversion metrics in SQL
-5. Built an interactive Tableau dashboard to visualize lead flow and drop-offs
+2. Performed initial data quality checks and validation in **Excel**
+3. Saved a cleaned, verified CSV for analysis
+4. Applied funnel logic and created analytical fields in **SQL**
+5. Calculated funnel counts and conversion metrics in SQL
+6. Built an interactive **Tableau dashboard** to visualize lead flow and drop-offs
 
 ---
 ```text
@@ -72,23 +73,35 @@ sales_lead_funnel_analysis/
 ---
 
 ## Tools & Technologies
-- **SQL** – Data cleaning, aggregation, and funnel KPI calculations
-- **Excel** – Data validation, QA checks, and exploratory review
+- **Excel** – Initial data inspection, duplicate checks, and QA validation
+- **SQL (SQLite)** – Funnel stage standardization, KPI creation, and aggregation
 - **Tableau** – Interactive dashboard for funnel visualization
 - **CSV** – Synthetic sales leads dataset
 
 ---
 
 ## Data Cleaning & Validation
-- Removed duplicate lead records
-- Standardized funnel stage naming and values
-- Ensured no missing primary identifiers
-- Validated record counts between raw and cleaned datasets
 
-Excel QA checks were used to confirm:
-- Funnel stage consistency
-- Aggregated counts matched SQL outputs
-- Cleaned data integrity prior to analysis
+## Excel (Initial QA)
+
+Before applying SQL logic, the raw dataset was reviewed in Excel to ensure data quality:
+- Verified total row count (~10,000 records)
+- Checked for duplicate records (none found)
+- Confirmed no missing or invalid Deal Stage values
+- Visually inspected Deal Stage consistency
+No critical data quality issues were identified, so no rows were removed.
+This ensured that downstream funnel metrics reflected the full lead population without introducing bias.
+A cleaned dataset was saved for downstream SQL processing.
+
+
+### SQL (Analytical Cleaning)
+
+SQL was used to:
+- Standardize Deal Stage values into ordered funnel stages
+- Add a binary conversion flag (is_converted)
+- Rename columns for consistency and usability
+- Preserve all validated records for analysis
+This separation ensures that Excel handles data quality, while SQL encodes business logic.
 
 ---
 

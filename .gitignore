@@ -1,0 +1,17 @@
+# --- Databases ---
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Excel / Office temp & working files ---
+*.xlsx
+~$*.xlsx
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+
+# --- Python / Conda ---
+__pycache__/
+*.pyc
+.env
