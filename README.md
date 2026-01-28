@@ -141,25 +141,26 @@ The Tableau dashboard visualizes:
 This design allows stakeholders to directly compare scale versus efficiency across lead sources.
 
 
-📸 **Dashboard Preview**
+## 📸 Dashboard Preview
 
 The following screenshots highlight the key analytical views surfaced in the Tableau dashboard.
 
-**1. Full Funnel Overview**  
-`/screenshots/dashboard_funnel_overview.png`  
+### 1. Full Funnel Overview
+![Full Funnel Overview](screenshots/dashboard_funnel_overview.png)
 Shows lead distribution across funnel stages and overall outcomes (Won / Lost / Open).
 
-**2. Channel Performance – Open Pipeline Volume**  
-`/screenshots/source_performance_open_pipeline_volume.png`  
+### 2. Channel Performance – Open Pipeline Volume
+![Channel Performance – Open Pipeline Volume](screenshots/source_performance_open_pipeline_volume.png)
 Ranks lead sources by open pipeline volume to highlight channels that drive scale.
 
-**3. Channel Performance – Conversion Efficiency**  
-`/screenshots/source_performance_ranked_by_conversion_rate.png`  
+### 3. Channel Performance – Conversion Efficiency
+![Channel Performance – Conversion Efficiency](screenshots/source_performance_ranked_by_conversion_rate.png)
 Ranks lead sources by conversion rate to identify high-efficiency channels.
 
-**4. Source Volume Breakdown**  
-`/screenshots/source_performance_Volume_breakdown.png`  
+### 4. Source Volume Breakdown
+![Source Volume Breakdown](screenshots/source_performance_volume_breakdown.png)
 Displays open, won, and lost leads by source for contextual volume comparison.
+
 
 
 ---
