@@ -15,6 +15,8 @@ Key questions addressed:
 - Which funnel stages contain the highest concentration of lost or stalled leads?
 - Where should sales teams focus to improve funnel efficiency?
 - How can funnel performance be clearly communicated to stakeholders?
+- Which lead sources deliver scale versus conversion efficiency?
+
 
 ---
 
@@ -23,11 +25,11 @@ Key questions addressed:
 - **Format:** CSV
 - **Records:** 10,000 sales leads with defined lifecycle stages
 - **Example Fields:**
-  - Lead ID
-  - Deal Stage
-  - Lead Source / Channel
-  - Contact Information
-  - Notes
+- Lead Source / Channel
+- Funnel Stage
+- Deal Outcome
+- Supporting metadata fields
+
 
 Raw and cleaned datasets are stored separately to preserve data lineage, reproducibility, and auditability.
 
@@ -82,12 +84,12 @@ sales_lead_funnel_analysis/
 
 ## Data Cleaning & Validation
 
-## Excel (Initial QA)
+### Excel (Initial QA)
 
 Before applying SQL logic, the raw dataset was reviewed in Excel to ensure data quality:
 - Verified total row count (~10,000 records)
 - Checked for duplicate records (none found)
-- Confirmed no missing or invalid Deal Stage values
+- Confirmed no missing Deal Stage values; minor formatting inconsistencies were standardized later in SQL.
 - Visually inspected Deal Stage consistency
 No critical data quality issues were identified, so no rows were removed.
 This ensured that downstream funnel metrics reflected the full lead population without introducing bias.
@@ -99,6 +101,7 @@ A cleaned dataset was saved for downstream SQL processing.
 SQL was used to:
 - Standardize Deal Stage values into ordered funnel stages
 - Add a binary conversion flag (is_converted)
+- Aggregate leads by stage and source to compute funnel distributions and conversion rates
 - Rename columns for consistency and usability
 - Preserve all validated records for analysis
 This separation ensures that Excel handles data quality, while SQL encodes business logic.
@@ -132,20 +135,40 @@ These assumptions ensure that reported metrics accurately reflect the structure 
 ## Tableau Dashboard
 The Tableau dashboard visualizes:
 - Lead counts by funnel stage
-- Overall funnel outcome rates (Won / Lost / Open)
-- Funnel concentration points at a glance
+- Overall funnel outcomes (Won / Lost / Open)
+- Channel performance ranked by either open pipeline volume or conversion rate via an interactive toggle
 
-The dashboard is designed for non-technical stakeholders and supports fast, data-driven decision making.
+This design allows stakeholders to directly compare scale versus efficiency across lead sources.
 
-📸 **Dashboard Preview:**  
-See `/screenshots/funnel_dashboard.png`
+
+📸 **Dashboard Preview**
+
+The following screenshots highlight the key analytical views surfaced in the Tableau dashboard.
+
+**1. Full Funnel Overview**  
+`/screenshots/dashboard_funnel_overview.png`  
+Shows lead distribution across funnel stages and overall outcomes (Won / Lost / Open).
+
+**2. Channel Performance – Open Pipeline Volume**  
+`/screenshots/source_performance_open_pipeline_volume.png`  
+Ranks lead sources by open pipeline volume to highlight channels that drive scale.
+
+**3. Channel Performance – Conversion Efficiency**  
+`/screenshots/source_performance_ranked_by_conversion_rate.png`  
+Ranks lead sources by conversion rate to identify high-efficiency channels.
+
+**4. Source Volume Breakdown**  
+`/screenshots/source_performance_Volume_breakdown.png`  
+Displays open, won, and lost leads by source for contextual volume comparison.
+
 
 ---
 
 ## Key Insights
-- The majority of leads are concentrated mid-funnel, particularly in the Active Deal stage.
-- Overall conversion remains low (~10%), with most leads still open, highlighting an opportunity to improve deal progression rather than lead acquisition.
-- Funnel visibility enables data-driven prioritization of sales process improvements.
+- Cold Email, Organic Search, Trade Shows, and Webinars rank among the most efficient channels by conversion rate, despite contributing lower overall pipeline volume.
+- Direct Traffic, Google Ads, and Retargeting dominate open pipeline volume but convert less efficiently, highlighting a clear tradeoff between scale and efficiency.
+- Overall conversion remains low (~10%), with most leads still open, suggesting greater opportunity in improving deal progression rather than increasing lead volume.
+
 
 ---
 
@@ -165,3 +188,6 @@ This project demonstrates practical, job-relevant data analyst skills:
 - Communicating insights visually with Tableau
 
 It mirrors the type of funnel analysis commonly used by sales, marketing, and operations teams in real organizations.
+
+## Reproducibility
+All data processing steps are documented and repeatable. Raw data is preserved separately from cleaned data, SQL scripts are versioned, and the Tableau workbook can be refreshed using the cleaned CSV without manual intervention.
