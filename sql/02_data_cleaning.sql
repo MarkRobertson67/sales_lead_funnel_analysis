@@ -74,4 +74,4 @@ SELECT
         ELSE 0
     END AS is_converted
 
-FROM leads_source;
+FROM leads_raw;
