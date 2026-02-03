@@ -18,10 +18,10 @@ The database file was created automatically when SQLite opened it:
 ```bash
 sqlite3 sales_leads.db
 If the file does not exist, SQLite creates it immediately.
+```
 
 
-
-2. Raw data import
+## 2. Raw data import
 Table: leads_raw
 
 Purpose:
@@ -37,6 +37,7 @@ Imported via SQLite CSV import
 Column names were preserved exactly as in the CSV
 
 Schema:
+```bash
 CREATE TABLE IF NOT EXISTS "leads_raw"(
   "Index" TEXT,
   "Account Id" TEXT,
@@ -53,6 +54,7 @@ CREATE TABLE IF NOT EXISTS "leads_raw"(
   "Deal Stage" TEXT,
   "Notes" TEXT
 );
+```
 
 Notes:
 
@@ -62,7 +64,7 @@ This table is not used directly for analytics
 
 
 
-3. Cleaned / analytics-ready data
+## 3. Cleaned / analytics-ready data
 Table: leads_cleaned
 
 Purpose:
@@ -80,6 +82,7 @@ Populated via INSERT INTO ... SELECT ... FROM leads_raw
 Added derived fields using CASE logic
 
 Schema:
+```bash
 CREATE TABLE leads_cleaned(
   lead_index TEXT,
   account_id TEXT,
@@ -99,6 +102,7 @@ CREATE TABLE leads_cleaned(
   funnel_order,
   is_converted
 );
+```
 
 Derived columns:
 
@@ -110,7 +114,7 @@ is_converted – 1 if Closed Won, else 0
 
 
 
-4. Funnel summary tables (derived outputs)
+## 4. Funnel summary tables (derived outputs)
 
 These tables store aggregated results for reporting and Tableau.
 
@@ -123,12 +127,14 @@ Purpose:
 Distribution of leads by funnel stage
 
 Schema:
+```bash
 CREATE TABLE funnel_stage_metrics(
   funnel_order,
   funnel_stage,
   leads_in_stage,
   pct_of_total
 );
+```
 
 Table: funnel_conversion_rates
 
@@ -137,6 +143,7 @@ Purpose:
 Conversion performance by funnel stage
 
 Schema:
+```bash
 CREATE TABLE funnel_conversion_rates(
   funnel_order,
   funnel_stage,
@@ -144,6 +151,7 @@ CREATE TABLE funnel_conversion_rates(
   converted_leads,
   conversion_rate_to_close
 );
+```
 
 Table: funnel_outcome_summary
 
@@ -152,6 +160,7 @@ Purpose:
 Overall funnel outcomes (single-row summary)
 
 Schema:
+```bash
 CREATE TABLE funnel_outcome_summary(
   total_leads,
   won_leads,
@@ -161,6 +170,7 @@ CREATE TABLE funnel_outcome_summary(
   lost_rate,
   open_rate
 );
+```
 
 Table: source_outcome_breakdown
 
@@ -171,6 +181,7 @@ Funnel outcomes broken down by lead source
 Used for channel and digital vs non-digital insights
 
 Schema:
+```bash
 CREATE TABLE source_outcome_breakdown(
   source TEXT,
   total_leads,
@@ -180,10 +191,10 @@ CREATE TABLE source_outcome_breakdown(
   won_rate,
   lost_rate
 );
+```
 
 
-
-5. Relationships & ERD notes
+## 5. Relationships & ERD notes
 
 No primary keys or foreign keys were explicitly defined
 
@@ -203,16 +214,16 @@ ERD tools only draw relationships when foreign keys are declared.
 
 
 
-6. CSV export for Tableau
+## 6. CSV export for Tableau
 
 Aggregated tables were exported using SQLite shell commands:
-
+```bash
 .mode csv
 .headers on
 .output tableau/<filename>.csv
 SELECT * FROM <table_name>;
 .output stdout
-
+```
 
 These CSVs were then loaded into Tableau.
 
@@ -236,24 +247,24 @@ Opening the file creates the database if it does not exist.
 
 ```bash
 sqlite3 sales_leads.db
-
+```
 
 ⚠️ Opening the wrong filename (e.g. funnel.db) will silently create
 a new empty database.
 
-A2. Inspecting database contents
+### A2. Inspecting database contents
 
 Run inside the SQLite shell (sqlite> prompt):
-
+```bash
 .tables        -- list tables and views
 .schema        -- show CREATE TABLE / VIEW statements
 .schema --indent
 .databases     -- show file path of the active database
-
+```
 
 These commands were used to debug schema and ERD issues.
 
-A3. Importing raw CSV data
+### A3. Importing raw CSV data
 
 Raw lead data was imported into leads_raw.
 
