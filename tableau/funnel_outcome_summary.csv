@@ -1,2 +1,20 @@
+-- ============================================================
+-- Output from 04_conversion_rates.sql
+-- Purpose:
+--   Export overall funnel outcome metrics (Won / Lost / Open)
+--   for Tableau visualization.
+--
+-- The following SQLite CLI commands were run in the terminal
+-- to export the aggregated table to CSV:
+--
+-- .mode csv
+-- .headers on
+-- .output tableau/funnel_outcome_summary.csv
+-- SELECT * FROM funnel_outcome_summary;
+-- .output stdout
+--
+-- Resulting output:
+-- ============================================================
+
 total_leads,won_leads,lost_leads,open_leads,won_rate,lost_rate,open_rate
 10000,1038,1956,7006,0.1038,0.1956,0.7006

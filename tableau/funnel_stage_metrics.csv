@@ -1,3 +1,22 @@
+-- ============================================================
+-- Output from 03_funnel_metrics.sql
+-- Purpose:
+--   Export funnel stage distribution metrics:
+--   leads_in_stage and pct_of_total (share of total leads)
+--   for Tableau visualization.
+--
+-- The following SQLite CLI commands were run in the terminal
+-- to export the aggregated table to CSV:
+--
+--   .mode csv
+--   .headers on
+--   .output tableau/funnel_stage_metrics.csv
+--   SELECT * FROM funnel_stage_metrics;
+--   .output stdout
+--
+-- Resulting output:
+-- ============================================================
+
 funnel_order,funnel_stage,leads_in_stage,pct_of_total
 1,"Lead Created",993,0.0993
 2,Contacted,1028,0.1028

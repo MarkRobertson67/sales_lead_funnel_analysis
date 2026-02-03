@@ -1,3 +1,22 @@
+-- ============================================================
+-- Output from 05_source_breakdown.sql
+-- Purpose:
+--   Export funnel outcomes by lead Source (channel):
+--   total_leads, won/lost/open counts, and win/loss rates
+--   for Tableau visualization and channel performance insights.
+--
+-- The following SQLite CLI commands were run in the terminal
+-- to export the aggregated table to CSV:
+--
+--   .mode csv
+--   .headers on
+--   .output tableau/source_outcome_breakdown.csv
+--   SELECT * FROM source_outcome_breakdown;
+--   .output stdout
+--
+-- Resulting output:
+-- ============================================================
+
 source,total_leads,won_leads,lost_leads,open_leads,won_rate,lost_rate
 "Retargeting Ads",531,51,106,374,0.096,0.1996
 Referral,530,49,123,358,0.0925,0.2321
