@@ -21,7 +21,10 @@ Key questions addressed:
 ---
 
 ## Dataset
-- **Source:** Synthetic CSV dataset from Datablist
+- **Source:** Public sample leads dataset from Datablist 
+```bash 
+  https://www.datablist.com/learn/csv/download-sample-csv-files#leads-dataset
+  ```
 - **Format:** CSV
 - **Records:** 10,000 sales leads with defined lifecycle stages
 - **Example Fields:**

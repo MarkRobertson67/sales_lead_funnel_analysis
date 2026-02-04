@@ -51,7 +51,11 @@ mkdir data raw_data cleaned_data sql tableau screenshots
 
 
 ## 2. Raw data preparation
-2.1 Source data
+### 2.1 Source data
+
+The raw CSV was sourced from a publicly available Datablist sample
+leads dataset and stored in `/data/raw_data` without modification.
+
 
     Original dataset provided as CSV / Excel
 
@@ -165,7 +169,7 @@ Executed in terminal:
 
 .read sql/01_create_tables.sql
 
-5.2 02_data_cleaning.sql
+### 5.2 02_data_cleaning.sql
 
 Purpose:
 

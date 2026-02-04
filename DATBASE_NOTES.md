@@ -19,17 +19,27 @@ sqlite3 sales_leads.db
 If the file does not exist, SQLite creates it immediately.
 
 ## 2. Raw data import
-Table: leads_raw
+### Table: leads_raw
 
-Purpose: 
-Stores the raw, unmodified lead data. Imported directly from CSV
+**Purpose**
 
+- Stores the raw, unmodified lead data
+- Serves as the immutable source of truth for all downstream transformations
+- Imported directly from CSV without preprocessing
 
-How it was created:
+**Data origin**
 
-Imported via SQLite CSV import
+- Source: Public sample leads dataset from Datablist  
+```bash
+  https://www.datablist.com/learn/csv/download-sample-csv-files#leads-dataset
+  ```
+- Dataset is synthetic and used for demonstration and analysis purposes
 
-Column names were preserved exactly as in the CSV
+**How it was created**
+
+- Imported using the SQLite CLI CSV import
+- No transformations applied prior to import
+- Column names, spacing, and capitalization preserved exactly as provided
 
 Schema:
 ```bash
