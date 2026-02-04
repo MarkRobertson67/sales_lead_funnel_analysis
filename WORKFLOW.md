@@ -87,9 +87,9 @@ It can be regenerated from the raw CSV and SQL scripts.
 ### 3.1 Create SQLite database file
 
 From terminal:
-
+```bash
 sqlite3 sales_leads.db
-
+```
 Notes:
 
     SQLite automatically creates the database file
@@ -98,11 +98,11 @@ Notes:
 
 ### 3.2 Import raw CSV into SQLite
 
-Inside SQLite shell:
-
+####Inside SQLite shell:
+```bash
 .mode csv
 .import data/raw_data/leads_raw_10000.csv leads_raw
-
+```
 Result:
 
     Table leads_raw created
@@ -116,10 +116,10 @@ Result:
 ### 4.1 Inspect schema
 
 Used SQLite meta-commands:
-
+```bash
 .tables
 .schema
-
+```
 
 ### 4.2 Create ERD (conceptual)
 
@@ -149,11 +149,11 @@ and stored in the sql/ directory.
 
 ### 5.1 01_create_tables.sql
 
-Purpose:
+#### Purpose:
 
 Define cleaned and output tables
 
-Created:
+#### Created:
 
 leads_cleaned
 
@@ -165,23 +165,25 @@ funnel_outcome_summary
 
 source_outcome_breakdown
 
-Executed in terminal:
+#### Executed in terminal:
 
+```bash
 .read sql/01_create_tables.sql
+```
 
 ### 5.2 02_data_cleaning.sql
 
-Purpose:
+#### Purpose:
 
 Transform raw data into analytics-ready format
 
-Actions:
+#### Actions:
 
 Renamed columns
 
 Standardized values
 
-Derived:
+#### Derived:
 
 funnel_stage
 
@@ -189,17 +191,18 @@ funnel_order
 
 is_converted
 
-Executed:
-
+#### Executed:
+```bash
 .read sql/02_data_cleaning.sql
+```
 
 ### 5.3 03_funnel_metrics.sql
 
-Purpose:
+#### Purpose:
 
 Create funnel stage distribution metrics
 
-Outputs:
+#### Outputs:
 
 funnel_stage_metrics
 
@@ -207,17 +210,18 @@ leads per stage
 
 percent of total leads
 
-Executed:
-
+#### Executed:
+```bash
 .read sql/03_funnel_metrics.sql
+```
 
 ### 5.4 04_conversion_rates.sql
 
-Purpose:
+#### Purpose:
 
 Create overall funnel outcome metrics
 
-Outputs:
+#### Outputs:
 
 funnel_outcome_summary
 
@@ -225,17 +229,18 @@ won / lost / open
 
 conversion rates
 
-Executed:
-
+#### Executed:
+```bash
 .read sql/04_conversion_rates.sql
+```
 
 ### 5.5 05_source_breakdown.sql
 
-Purpose:
+#### Purpose:
 
 Analyze funnel outcomes by lead source
 
-Outputs:
+#### Outputs:
 
 source_outcome_breakdown
 
@@ -243,26 +248,26 @@ channel-level performance
 
 win/loss rates
 
-Executed:
-
+#### Executed:
+```bash
 .read sql/05_source_breakdown.sql
-
+```
 
 ## 6. CSV export for Tableau
 
 All Tableau data sources were exported directly
 from SQLite using the terminal.
 
-General pattern:
-
+### General pattern:
+```bash
 .mode csv
 .headers on
 .output tableau/<filename>.csv
 SELECT * FROM <table_name>;
 .output stdout
+```
 
-
-Exported files:
+### Exported files:
 
 funnel_stage_metrics.csv
 
@@ -289,12 +294,12 @@ Saved screenshots to screenshots/
 ## 8. Version control
 
 All work committed incrementally:
-
+```bash
 git status
 git add .
 git commit -m "Add funnel metrics and Tableau exports"
 git push
-
+```
 
 ## 9. Key takeaways
 
