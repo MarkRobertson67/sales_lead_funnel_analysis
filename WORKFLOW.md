@@ -84,7 +84,7 @@ data/raw_data/leads_raw_10000.csv
 Note: The SQLite database file is intentionally not committed.
 It can be regenerated from the raw CSV and SQL scripts.
 
-3.1 Create SQLite database file
+### 3.1 Create SQLite database file
 
 From terminal:
 
@@ -113,7 +113,7 @@ Result:
 
 
 ## 4. Schema inspection & ERD
-4.1 Inspect schema
+### 4.1 Inspect schema
 
 Used SQLite meta-commands:
 
