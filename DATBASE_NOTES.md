@@ -3,8 +3,6 @@
 This file documents **how the SQLite database was created**,  
 **what tables exist**, and **what each table is used for**.
 
-If you forget what you did later — start here.
-
 ---
 
 ## 1. How the database was created
@@ -17,18 +15,15 @@ The database file was created automatically when SQLite opened it:
 
 ```bash
 sqlite3 sales_leads.db
-If the file does not exist, SQLite creates it immediately.
 ```
-
+If the file does not exist, SQLite creates it immediately.
 
 ## 2. Raw data import
 Table: leads_raw
 
-Purpose:
+Purpose: 
+Stores the raw, unmodified lead data. Imported directly from CSV
 
-Stores the raw, unmodified lead data
-
-Imported directly from CSV
 
 How it was created:
 

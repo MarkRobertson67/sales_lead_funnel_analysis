@@ -16,8 +16,9 @@ If I need to recreate this project later, this file is the starting point.
 
 ```bash
 git init
+```
 
-1.2 Create project folder structure
+### 1.2 Create project folder structure
 
 sales_lead_funnel_analysis/
 ├─ data/
@@ -36,7 +37,7 @@ Folders were created manually or via terminal:
 
 mkdir data raw_data cleaned_data sql tableau screenshots
 
-1.3 Create README and .gitignore
+### 1.3 Create README and .gitignore
 
     Added README.md to describe the project
 
@@ -49,7 +50,7 @@ mkdir data raw_data cleaned_data sql tableau screenshots
         editor/system files
 
 
-2. Raw data preparation
+## 2. Raw data preparation
 2.1 Source data
 
     Original dataset provided as CSV / Excel
@@ -61,7 +62,7 @@ Stored in:
 
 data/raw_data/leads_raw_10000.csv
 
-2.2 Initial inspection
+### 2.2 Initial inspection
 
     Opened CSV in Excel for:
 
@@ -74,7 +75,7 @@ data/raw_data/leads_raw_10000.csv
     All cleaning handled in SQL
 
 
-3. SQLite database creation
+## 3. SQLite database creation
 
 Note: The SQLite database file is intentionally not committed.
 It can be regenerated from the raw CSV and SQL scripts.
@@ -91,7 +92,7 @@ Notes:
 
     No CREATE DATABASE statement is required
 
-3.2 Import raw CSV into SQLite
+### 3.2 Import raw CSV into SQLite
 
 Inside SQLite shell:
 
@@ -107,7 +108,7 @@ Result:
     Quoted column names and spaces indicate raw import
 
 
-4. Schema inspection & ERD
+## 4. Schema inspection & ERD
 4.1 Inspect schema
 
 Used SQLite meta-commands:
@@ -116,7 +117,7 @@ Used SQLite meta-commands:
 .schema
 
 
-4.2 Create ERD (conceptual)
+### 4.2 Create ERD (conceptual)
 
 ERD was created to visualize:
 
@@ -137,12 +138,12 @@ leads_cleaned
 funnel metrics tables
 
 
-5. SQL development (core logic)
+## 5. SQL development (core logic)
 
 All SQL logic was written as separate, ordered scripts
 and stored in the sql/ directory.
 
-5.1 01_create_tables.sql
+### 5.1 01_create_tables.sql
 
 Purpose:
 
@@ -188,7 +189,7 @@ Executed:
 
 .read sql/02_data_cleaning.sql
 
-5.3 03_funnel_metrics.sql
+### 5.3 03_funnel_metrics.sql
 
 Purpose:
 
@@ -206,7 +207,7 @@ Executed:
 
 .read sql/03_funnel_metrics.sql
 
-5.4 04_conversion_rates.sql
+### 5.4 04_conversion_rates.sql
 
 Purpose:
 
@@ -224,7 +225,7 @@ Executed:
 
 .read sql/04_conversion_rates.sql
 
-5.5 05_source_breakdown.sql
+### 5.5 05_source_breakdown.sql
 
 Purpose:
 
@@ -243,7 +244,7 @@ Executed:
 .read sql/05_source_breakdown.sql
 
 
-6. CSV export for Tableau
+## 6. CSV export for Tableau
 
 All Tableau data sources were exported directly
 from SQLite using the terminal.
@@ -266,7 +267,7 @@ funnel_outcome_summary.csv
 source_outcome_breakdown.csv
 
 
-7. Tableau visualization
+## 7. Tableau visualization
 
 Imported CSV files into Tableau
 
@@ -281,7 +282,7 @@ source performance
 Saved screenshots to screenshots/
 
 
-8. Version control
+## 8. Version control
 
 All work committed incrementally:
 
@@ -291,7 +292,7 @@ git commit -m "Add funnel metrics and Tableau exports"
 git push
 
 
-9. Key takeaways
+## 9. Key takeaways
 
 Entire project is terminal-driven and reproducible
 
@@ -304,7 +305,7 @@ CSVs act as clean interfaces to Tableau
 Documentation ensures future reproducibility
 
 
-10. Rebuild checklist (quick)
+## 10. Rebuild checklist (quick)
 
 Clone repo
 
@@ -334,10 +335,12 @@ sales_lead_funnel_analysis/
    ├─ funnel_outcome_summary.csv
    ├─ funnel_stage_metrics.csv
    └─ source_outcome_breakdown.csv
+   ```
 
 These CSVs represent final, analytics-ready data marts.
 Tableau does not connect directly to the SQLite database.
-11.2 Connecting CSV files in Tableau Desktop
+
+### 11.2 Connecting CSV files in Tableau Desktop
 
 In Tableau Desktop, the following steps were used:
 
@@ -358,7 +361,8 @@ In Tableau Desktop, the following steps were used:
     Click Open
 
 Each CSV file was connected as a separate Tableau data source.
-11.3 Tableau data sources used
+
+### 11.3 Tableau data sources used
 Tableau Worksheet / Dashboard	CSV Data Source
 Funnel overview KPIs	funnel_outcome_summary.csv
 Funnel stage distribution	funnel_stage_metrics.csv
@@ -366,7 +370,8 @@ Source performance & ranking	source_outcome_breakdown.csv
 
 This separation allows each visualization to use a purpose-built,
 pre-aggregated dataset.
-11.4 Why CSV files were used (design choice)
+
+### 11.4 Why CSV files were used (design choice)
 
 CSV was intentionally chosen as the interface between SQLite and Tableau because:
 
@@ -388,7 +393,7 @@ This mirrors a common analytics workflow:
 
 Database → Aggregation → Export → BI Tool
 
-11.5 Reproducibility guarantee
+### 11.5 Reproducibility guarantee
 
 If this project is cloned on another machine:
 
@@ -400,7 +405,7 @@ If this project is cloned on another machine:
 
 All dashboards will reproduce the same results.
 
-11.6 Notes on file discovery
+### 11.6 Notes on file discovery
 
 CSV files were located using Tableau’s file browser by navigating
 the repository folder structure.
