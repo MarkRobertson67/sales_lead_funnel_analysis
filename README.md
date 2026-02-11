@@ -49,29 +49,39 @@ Raw and cleaned datasets are stored separately to preserve data lineage, reprodu
 ---
 ```text
 ## Project Structure
+
 sales_lead_funnel_analysis/
-│
 ├── data/
 │ ├── raw_data/
-│ │ └── leads_raw.csv
+│ │ └── leads_raw_10000.csv
 │ ├── cleaned_data/
-│ │ └── leads_cleaned.csv
+│ │ ├── leads_cleaned_for_sql.csv
+│ │ └── leads_cleaned_validation.xlsx
 │
-├── excel/
-│ └── lead_validation_checks.xlsx
+├── screenshots/
+│ ├── dashboard_funnel_overview.png
+│ ├── Source_performance_open_pipeline_volume.png
+│ ├── Source_performance_ranked_by_conversion_rate.png
+│ ├── Source_performance_Volume_breakdown.png
+│ ├── Source_performance_Volume_digital.png
+│ └── Source_performance_Volume_non_digital.png
 │
 ├── sql/
 │ ├── 01_create_tables.sql
 │ ├── 02_data_cleaning.sql
 │ ├── 03_funnel_metrics.sql
-│ └── 04_conversion_rates.sql
+│ ├── 04_conversion_rates.sql
+│ └── 05_source_breakdown.sql
 │
 ├── tableau/
-│ └── sales_lead_funnel_dashboard.twbx
+│ ├── funnel_outcome_summary.csv
+│ ├── funnel_stage_metrics.csv
+│ ├── source_outcome_breakdown.csv
 │
-├── screenshots/
-│ └── funnel_dashboard.png
-│
+├── sales_leads.db
+├── DATABASE_NOTES.md
+├── WORKFLOW.md
+├── .gitignore
 └── README.md
 ```
 
@@ -178,9 +188,6 @@ These views are accessible via dashboard filters and are included for completene
 ![Non-Digital Channel Volume](screenshots/Source_performance_Volume_non_digital.png)
 
 </details>
-
-
-
 
 ---
 
