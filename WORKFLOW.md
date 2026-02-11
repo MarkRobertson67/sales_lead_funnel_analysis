@@ -10,6 +10,7 @@ If I need to recreate this project later, this file is the starting point.
 ## 1. Project initialization
 
 ### 1.1 Create repository
+
 - Created a new Git repository:
   `sales_lead_funnel_analysis`
 - Initialized locally and linked to GitHub
@@ -22,8 +23,8 @@ git init
 
 sales_lead_funnel_analysis/
 ├─ data/
-│  ├─ raw_data/
-│  └─ cleaned_data/
+│ ├─ raw_data/
+│ └─ cleaned_data/
 ├─ sql/
 ├─ tableau/
 ├─ screenshots/
@@ -49,13 +50,12 @@ mkdir data raw_data cleaned_data sql tableau screenshots
 
         editor/system files
 
-
 ## 2. Raw data preparation
+
 ### 2.1 Source data
 
 The raw CSV was sourced from a publicly available Datablist sample
 leads dataset and stored in `/data/raw_data` without modification.
-
 
     Original dataset provided as CSV / Excel
 
@@ -78,7 +78,6 @@ data/raw_data/leads_raw_10000.csv
 
     All cleaning handled in SQL
 
-
 ## 3. SQLite database creation
 
 Note: The SQLite database file is intentionally not committed.
@@ -87,9 +86,11 @@ It can be regenerated from the raw CSV and SQL scripts.
 ### 3.1 Create SQLite database file
 
 From terminal:
+
 ```bash
 sqlite3 sales_leads.db
 ```
+
 Notes:
 
     SQLite automatically creates the database file
@@ -99,10 +100,12 @@ Notes:
 ### 3.2 Import raw CSV into SQLite
 
 ####Inside SQLite shell:
+
 ```bash
 .mode csv
 .import data/raw_data/leads_raw_10000.csv leads_raw
 ```
+
 Result:
 
     Table leads_raw created
@@ -111,11 +114,12 @@ Result:
 
     Quoted column names and spaces indicate raw import
 
-
 ## 4. Schema inspection & ERD
+
 ### 4.1 Inspect schema
 
 Used SQLite meta-commands:
+
 ```bash
 .tables
 .schema
@@ -136,11 +140,10 @@ ERD used for understanding flow, not enforcement
 Conceptual flow:
 
 leads_raw
-   ↓
+↓
 leads_cleaned
-   ↓
+↓
 funnel metrics tables
-
 
 ## 5. SQL development (core logic)
 
@@ -192,6 +195,7 @@ funnel_order
 is_converted
 
 #### Executed:
+
 ```bash
 .read sql/02_data_cleaning.sql
 ```
@@ -211,6 +215,7 @@ leads per stage
 percent of total leads
 
 #### Executed:
+
 ```bash
 .read sql/03_funnel_metrics.sql
 ```
@@ -230,6 +235,7 @@ won / lost / open
 conversion rates
 
 #### Executed:
+
 ```bash
 .read sql/04_conversion_rates.sql
 ```
@@ -249,6 +255,7 @@ channel-level performance
 win/loss rates
 
 #### Executed:
+
 ```bash
 .read sql/05_source_breakdown.sql
 ```
@@ -259,6 +266,7 @@ All Tableau data sources were exported directly
 from SQLite using the terminal.
 
 ### General pattern:
+
 ```bash
 .mode csv
 .headers on
@@ -275,7 +283,6 @@ funnel_outcome_summary.csv
 
 source_outcome_breakdown.csv
 
-
 ## 7. Tableau visualization
 
 Imported CSV files into Tableau
@@ -290,10 +297,10 @@ source performance
 
 Saved screenshots to screenshots/
 
-
 ## 8. Version control
 
 All work committed incrementally:
+
 ```bash
 git status
 git add .
@@ -312,7 +319,6 @@ SQL scripts are modular and ordered
 CSVs act as clean interfaces to Tableau
 
 Documentation ensures future reproducibility
-
 
 ## 10. Rebuild checklist (quick)
 
@@ -344,16 +350,16 @@ sales_lead_funnel_analysis/
    ├─ funnel_outcome_summary.csv
    ├─ funnel_stage_metrics.csv
    └─ source_outcome_breakdown.csv
-   ```
+```
 
 These CSVs represent final, analytics-ready data marts.
 Tableau does not connect directly to the SQLite database.
 
-### 11.2 Connecting CSV files in Tableau Desktop
+### 11.2 Connecting CSV files in Tableau Public (Web)
 
-In Tableau Desktop, the following steps were used:
+In Tableau Public (Web), the following steps were used:
 
-    Open Tableau Desktop
+    Open Tableau Public (Web)
 
     Click Data → New Data Source
 
@@ -372,35 +378,37 @@ In Tableau Desktop, the following steps were used:
 Each CSV file was connected as a separate Tableau data source.
 
 ### 11.3 Tableau data sources used
-Tableau Worksheet / Dashboard	CSV Data Source
-Funnel overview KPIs	funnel_outcome_summary.csv
-Funnel stage distribution	funnel_stage_metrics.csv
-Source performance & ranking	source_outcome_breakdown.csv
+
+Tableau Worksheet / Dashboard CSV Data Source
+Funnel overview KPIs funnel_outcome_summary.csv
+Funnel stage distribution funnel_stage_metrics.csv
+Source performance & ranking source_outcome_breakdown.csv
 
 This separation allows each visualization to use a purpose-built,
 pre-aggregated dataset.
 
-### 11.4 Why CSV files were used (design choice)
+### 11.4 Why CSV Files Were Used (Design Decision)
 
-CSV was intentionally chosen as the interface between SQLite and Tableau because:
+CSV files were intentionally used as the interface between SQLite and Tableau Public (Web) due to both platform constraints and architectural clarity.
 
-    SQLite was used for data transformation and aggregation
+- **SQLite** handled data ingestion, transformation, business logic, and metric aggregation.
+- **Tableau Public (Web)** was used strictly for visualization and does not support direct connections to SQLite databases.
+- Therefore, curated analytical tables were exported from SQLite as CSV files and uploaded into Tableau.
 
-    Tableau was used strictly for visualization
+CSV was chosen because it:
 
-    CSV files:
+- Is easy to inspect and validate outside the database  
+- Can be version-controlled in Git  
+- Provides a stable, reproducible snapshot of computed metrics  
+- Avoids reliance on live database connections  
+- Keeps transformation logic separate from the visualization layer  
 
-        are easy to inspect and validate
+This reflects a common analytics workflow:
 
-        can be versioned in Git
+Database → Transformation → Aggregation → Export → BI Tool
 
-        provide a stable, reproducible snapshot of metrics
+By separating computation (SQLite) from presentation (Tableau), the pipeline remains transparent, reproducible, and aligned with real-world business intelligence practices.
 
-        avoid live database dependencies
-
-This mirrors a common analytics workflow:
-
-Database → Aggregation → Export → BI Tool
 
 ### 11.5 Reproducibility guarantee
 
@@ -421,4 +429,5 @@ the repository folder structure.
 
 Clear directory organization (/tableau) ensured the correct files
 were easy to identify and import.
+
 ---
