@@ -13,7 +13,8 @@
 --   .output tableau/funnel_stage_metrics.csv
 --   SELECT * FROM funnel_stage_metrics;
 --   .output stdout
---
+
+
 -- Resulting output:
 -- ============================================================
 

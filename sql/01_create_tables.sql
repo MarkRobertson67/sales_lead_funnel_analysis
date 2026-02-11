@@ -30,3 +30,13 @@
 -- ------------------------------------------------------------
 SELECT COUNT(*) AS raw_row_count
 FROM leads_raw;
+
+-- Expected Output:
+-- raw_row_count
+-- ------------
+-- 10000
+--
+-- Confirms:
+-- - All 10,000 records successfully imported
+-- - No truncation during ingestion
+-- - Raw layer ready for downstream transformation

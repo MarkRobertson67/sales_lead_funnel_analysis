@@ -13,7 +13,8 @@
 --   .output tableau/source_outcome_breakdown.csv
 --   SELECT * FROM source_outcome_breakdown;
 --   .output stdout
---
+
+
 -- Resulting output:
 -- ============================================================
 

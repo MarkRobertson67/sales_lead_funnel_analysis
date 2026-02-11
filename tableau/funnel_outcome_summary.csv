@@ -12,7 +12,8 @@
 -- .output tableau/funnel_outcome_summary.csv
 -- SELECT * FROM funnel_outcome_summary;
 -- .output stdout
---
+
+
 -- Resulting output:
 -- ============================================================
 
